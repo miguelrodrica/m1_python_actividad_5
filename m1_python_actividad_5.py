@@ -1,5 +1,6 @@
-students = []
-subjects = []
+students = [{"name": "Miguel", "age": 27, "id": "1010"}, {"name": "Angel", "age": 28, "id": 1212}]
+subjects = [{"name_subject": "Matemáticas", "code": "7878"}, {"name_subject": "Química", "code": "7979"}]
+assigments = []
 
 while True:
     print("")
@@ -126,7 +127,7 @@ while True:
                                         print("")
                                         print(f"Materia #{i+1}")
                                         name_subject = input("Nombre: ")
-                                        subject["name"] = name_subject
+                                        subject["name_subject"] = name_subject
                                         code_subject = input("Código: ")
                                         subject["code"] = code_subject
                                         subjects.append(subject)
@@ -138,14 +139,14 @@ while True:
                             print("¡VACÍO! Aún no se registra ninguna materia.")
                         else:
                             for subject in subjects:
-                                print(f"Nombre: {subject["name"]} | Código: {subject["code"]}")
+                                print(f"Nombre: {subject["name_subject"]} | Código: {subject["code"]}")
                     elif subjects_management_choice == 3:
                         found2 = True
                         while found2:
                             code_consult = input("Escriba el código de la materia a consultar: ")
                             for subject in subjects:
                                 if subject["code"] == code_consult:
-                                    print(f"Nombre: {subject["name"]} | Código: {subject["code"]}")
+                                    print(f"Nombre: {subject["name_subject"]} | Código: {subject["code"]}")
                                     break
                             found2 = False
                             if subject["code"] != code_consult:
@@ -159,7 +160,7 @@ while True:
                             for sucject in subjects:
                                 if delete_subject_code == subject["code"]:
                                     subjects.remove(subject)
-                                    print(f"Se eliminó la materia {subject["name"]} de la base de datos")
+                                    print(f"Se eliminó la materia {subject["name_subject"]} de la base de datos")
                                     break
                             repeat2 = False
                             if delete_subject_code != subject["code"]:
@@ -172,7 +173,48 @@ while True:
                     print("¡ERROR!. Debe ingresar un número entero.")
 
         elif user_choice == 3:
-            print("Hola Mundo")
+            while True:
+                print("")
+                print("-- ASIGNACIONES --")
+                print("1. Asignar materia a estudiante")
+                print("2. Ver materias de un estudiante")
+                print("3. Ver estudiantes por materia")
+                print("4. Quitar materia a un estudiante")
+                print("5. Atrás")
+                print("")
+                try:
+                    assigments_choice = int(input("Escriba el número de la opción seleccionada: "))
+                    print("")
+                    if assigments_choice <= 0 or assigments_choice > 5:
+                        print("¡ERROR!. Número no contemplado en la lista.")
+                    elif assigments_choice == 1:
+                        found3 = True
+                        while found3:
+                            assigments_student = input("Ingrese el documento del estudiante: ")
+                            for student in students:
+                                if student["id"] == assigments_student:
+                                    print("El estudiante SI existe")
+                                    found3 = False
+                                    break
+                                elif student["id"] != assigments_student:
+                                    print("El ID es incorrecto o inexistente. Intente de nuevo")
+                                    print("")
+                                    found3 = True
+                        found4 = True
+                        while found4:
+                            assigments_subject = input("Ingrese el código de la materia: ")
+                            for subject in subjects:
+                                if subject["code"] == assigments_subject:
+                                    print("La materia SI existe")
+                                    found4 = False
+                                    break
+                                elif subject["code"] != assigments_subject:
+                                    print("El código es incorrecto o inexistente. Intente de nuevo")
+                                    print("")
+                                    found4 = True
+
+                except ValueError:
+                    print("¡ERROR!. Debe ingresar un número entero.")
 
         elif user_choice == 6:
             break
